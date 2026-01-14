@@ -1,0 +1,14 @@
+services:
+  hytale-server:
+    image: ghcr.io/SkyVence/hytale-server:latest
+    container_name: hytale-server
+    ports:
+      - "5520:5520/udp"
+    stdin_open: true
+    tty: true
+    environment:
+      - CREDENTIALS_FILE=credentials.json
+    volumes:
+      - ./server-data:/server
+      - ./credentials.json:/server/credentials.json:ro
+    restart: unless-stopped
