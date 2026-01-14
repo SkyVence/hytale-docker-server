@@ -1,6 +1,6 @@
 services:
   hytale-server:
-    image: ghcr.io/SkyVence/hytale-server:latest
+    image: ghcr.io/skyvence/hytale-server:latest
     container_name: hytale-server
     ports:
       - "5520:5520/udp"

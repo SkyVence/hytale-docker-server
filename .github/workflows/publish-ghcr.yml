@@ -16,8 +16,8 @@ on:
     branches:
       - main
     tags:
-      - 'v*'
-      - 'release-*'
+      - "v*"
+      - "release-*"
   workflow_dispatch:
 
 permissions:
@@ -32,10 +32,20 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/hytale-server
+      # IMAGE_NAME will be computed and exported to $GITHUB_ENV by the 'downcase REPO' step
+      # so subsequent steps can reference it as ${{ env.IMAGE_NAME }}.
+      IMAGE_NAME: ""
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+
+      - name: downcase REPO (set IMAGE_NAME)
+        run: |
+          # Extract owner from owner/repo and lowercase it (Bash parameter expansion)
+          REPO_OWNER="${GITHUB_REPOSITORY%%/*}"
+          REPO_OWNER_LOWER="${REPO_OWNER,,}"
+          echo "IMAGE_NAME=ghcr.io/${REPO_OWNER_LOWER}/hytale-server" >> "$GITHUB_ENV"
+          echo "REPO_OWNER_LOWER=${REPO_OWNER_LOWER}" >> "$GITHUB_ENV"
 
       - name: Set up QEMU (for multi-arch)
         uses: docker/setup-qemu-action@v2
