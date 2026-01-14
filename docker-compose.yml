@@ -1,6 +1,6 @@
 services:
   hytale-server:
-    image: ghcr.io/skyvence/hytale-server:latest
+    image: ghcr.io/skyvence/hytale-server:v1.0.1
     container_name: hytale-server
     ports:
       - "5520:5520/udp"
@@ -9,6 +9,9 @@ services:
     environment:
       - CREDENTIALS_FILE=credentials.json
     volumes:
-      - ./server-data:/server
+      - hytale-server-data:/server
       - ./credentials.json:/server/credentials.json:ro
     restart: unless-stopped
+
+volumes:
+  hytale-server-data:

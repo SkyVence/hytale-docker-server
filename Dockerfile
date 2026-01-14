@@ -49,7 +49,6 @@ VOLUME [ "/server" ]
 WORKDIR /server
 EXPOSE 5520
 
-
 # Switch to non-root user
 USER server
 

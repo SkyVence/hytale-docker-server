@@ -40,4 +40,3 @@ docker run -d --name hytale-server -p 5520:5520/udp \
 Notes
 - The server listens on UDP port 5520.
 - Ensure `credentials.json` exists and contains valid credentials (it is mounted read-only in compose).
-- GHCR repository names must be lowercase (e.g., `ghcr.io/skyvence/...`). If you see an error about lowercase repository names, use a lowercase owner.
